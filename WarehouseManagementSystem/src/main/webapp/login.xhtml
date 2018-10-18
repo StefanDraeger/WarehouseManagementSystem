@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:graphicImage value="resources/images/quandt_logo.jpg" style="float:left;margin:10px;" width="150px"></h:graphicImage>
+	<h:panelGroup style="text-align:right;">
+		<h:form>
+			<h:outputLabel value="Benutzername" for="username" id="usernameLbl" />
+			<h:inputText id="username" value="#{loginBean.username}"
+				disabled="#{loginBean.loginSuccessfull}" />
+			<h:outputLabel value="Passwort" for="passwort" id="passwortLbl" />
+			<h:inputSecret id="passwort" value="#{loginBean.passwort}"
+				disabled="#{loginBean.loginSuccessfull}" />
+
+			<h:commandButton rendered="#{!loginBean.loginSuccessfull}"
+				id="loginBtn" value="Login" action="#{loginBean.doLogin}"></h:commandButton>
+
+			<h:commandButton rendered="#{loginBean.loginSuccessfull}"
+				id="logoutBtn" value="Logout" action="#{loginBean.doLogout}"></h:commandButton>
+
+		</h:form>
+	</h:panelGroup>
+</ui:composition>

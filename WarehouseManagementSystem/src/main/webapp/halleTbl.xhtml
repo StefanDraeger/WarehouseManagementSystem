@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="form" rendered="#{loginBean.loginSuccessfull}">
+		<p:commandButton update=":form:halleDetail" class="halleBtn"
+			oncomplete="PF('halleDialog').show()" title="Details"
+			style="float:left;font-size:12px;margin:10px;" icon="ui-icon-plus"
+			value="Halle hinzufügen...">
+			<f:setPropertyActionListener value="#{halle}"
+				target="#{firmaBean.selectedHalle}" />
+		</p:commandButton>
+		<br />
+		<br />
+
+		<p:dataGrid columns="3" value="#{firmaBean.hallen}" var="halle"
+			resizableColumns="true">
+			<f:facet name="header">
+				<h:outputText value="Hallen" />
+			</f:facet>
+			<p:panel>
+				<center>
+					<h:graphicImage value="resources/images/halle1.jpg"
+						style="text-align:center;"></h:graphicImage>				
+				<h:outputText value="#{halle.bezeichnung}"
+					style="text-align:center;display:inline-block;width:100%;" />
+				<p:commandButton update=":form:halleDetail" class="halleBtn"
+					oncomplete="PF('halleDialog').show()" title="öffnen"
+					style="float:left;font-size:12px;margin:10px;"
+					icon="ui-icon-folder-open" value="öffnen">
+					<f:setPropertyActionListener value="#{halle}"
+						target="#{firmaBean.selectedHalle}" />
+				</p:commandButton>
+				<p:commandButton update=":form:halleDetail" class="halleBtn"
+					oncomplete="PF('halleDialog').show()" title="Info"
+					style="float:left;font-size:12px;margin:10px;"
+					icon="ui-icon-info" value="Info">
+					<f:setPropertyActionListener value="#{halle}"
+						target="#{firmaBean.selectedHalle}" />
+				</p:commandButton>
+				<div style="clear: both" />
+				</center>
+			</p:panel>
+		</p:dataGrid>
+		<p:dialog header="Info..." widgetVar="halleDialog" modal="false"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="halleDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty firmaBean.selectedHalle}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<h:graphicImage value="resources/images/halle1.jpg"></h:graphicImage>
+					</f:facet>
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{firmaBean.selectedHalle.id}" />
+
+					<h:outputText value="Bezeichnung" />
+					<h:outputText value="#{firmaBean.selectedHalle.bezeichnung}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+</ui:composition>
