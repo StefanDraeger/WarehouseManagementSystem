@@ -2,4 +2,4 @@ label {min-width:100px; display: inline-block;margin-right:10px;margin-left:10px
 input[id*="loginBtn"], input[id*="logoutBtn"] {margin-right:10px;margin-left:10px;}
 input[id*="loginBtn"], label[id*="usernameLbl"], label[id*="passwortLbl"] { font-size: 14px;}
 .ui-layout-pane { border: 0;}
-.halleBtn{font-size:12px;}
+.halleBtn{float:left;font-size:12px!important;margin:5px;}

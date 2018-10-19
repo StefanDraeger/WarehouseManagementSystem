@@ -3,7 +3,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	<h:graphicImage value="resources/images/quandt_logo.jpg" style="float:left;margin:10px;" width="150px"></h:graphicImage>
+	<h:outputLink value="#{firmaBean.homelink}">
+		<h:graphicImage value="resources/images/quandt_logo.jpg"
+			style="float:left;margin:10px;" width="150px"></h:graphicImage>
+	</h:outputLink>
 	<h:panelGroup style="text-align:right;">
 		<h:form>
 			<h:outputLabel value="Benutzername" for="username" id="usernameLbl" />
@@ -13,12 +16,23 @@
 			<h:inputSecret id="passwort" value="#{loginBean.passwort}"
 				disabled="#{loginBean.loginSuccessfull}" />
 
-			<h:commandButton rendered="#{!loginBean.loginSuccessfull}"
-				id="loginBtn" value="Login" action="#{loginBean.doLogin}"></h:commandButton>
+			<p:commandButton rendered="#{!loginBean.loginSuccessfull}"
+				id="loginBtn" value="Login" action="#{loginBean.doLogin}">
+				<f:setPropertyActionListener target="#{firmaBean.contentPage}"
+					value="halleTbl" />
+			</p:commandButton>
 
-			<h:commandButton rendered="#{loginBean.loginSuccessfull}"
-				id="logoutBtn" value="Logout" action="#{loginBean.doLogout}"></h:commandButton>
-
+			<p:commandButton rendered="#{loginBean.loginSuccessfull}"
+				id="logoutBtn" value="Logout" action="#{loginBean.doLogout}">
+				<f:setPropertyActionListener target="#{firmaBean.contentPage}"
+					value="logout" />
+			</p:commandButton>
+			
+			<p:commandButton rendered="#{loginBean.loginSuccessfull}" value="Test" id="hallo" action="#{firmaBean.loadBenutzer}">
+				<f:setPropertyActionListener target="#{firmaBean.contentPage}"
+					value="logout" />
+			</p:commandButton>
 		</h:form>
+		<div style="clear: both;" />
 	</h:panelGroup>
 </ui:composition>

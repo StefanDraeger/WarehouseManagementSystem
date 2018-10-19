@@ -1,45 +1,45 @@
 package de.draegerit.wms;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.faces.context.FacesContext;
 
 import de.draegerit.wms.db.User;
 import de.draegerit.wms.db.dao.UserDAO;
 
-@Named
+@ManagedBean(name="loginBean")
 @SessionScoped
 public class LoginBean {
+
+	private static final String FAIL = "fail";
+
+	private static final String SUCCESS = "success";
+
+	private static final String EMPTY = "";
 
 	private String username;
 
 	private String passwort;
 
 	private boolean loginSuccessfull;
-
-	@Inject
-	private FirmaBean firmaBean;
 	
 	public String doLogin() {
 		UserDAO userDAO = new UserDAO();
 		User user = userDAO.findByUsername(getUsername());
 		if (user != null && passwort.equalsIgnoreCase(user.getPasswort())) {
-			setLoginSuccessfull(true);
-			firmaBean.setContentPage(EContentage.HALLETBL.getPage());
-			return "success";
+			setLoginSuccessfull(true);			
+			return SUCCESS;
 		}
 		setLoginSuccessfull(false);
-		return "fail";
+		return FAIL;
 	}
 
 	public String doLogout() {
-		setUsername("");
-		setPasswort("");
+		setUsername(EMPTY);
+		setPasswort(EMPTY);
 		setLoginSuccessfull(false);
-		return "success";
+		 FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return SUCCESS;
 
 	}
 
