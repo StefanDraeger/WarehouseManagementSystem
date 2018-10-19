@@ -1,7 +1,7 @@
 package de.draegerit.wms;
 
 public enum EContentage {
-	LOGOUT("logout"), HALLETBL("halleTbl");
+	LOGOUT("logout"), HALLETBL("halleTbl"),BENUTZERVERWALTUNG("benutzerverwaltung");
 
 	private String page;
 

@@ -36,5 +36,23 @@
 			<to-view-id>/addHalle.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{viewBean.benutzerverwaltung}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{viewBean.halleverwaltung}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{benutzerverwaltungBean.aktualisieren}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>

@@ -4,6 +4,71 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<h:form id="form" rendered="#{loginBean.loginSuccessfull}">
-		<h:outputText value="Test123" />
+		<p:dataTable var="user" value="#{benutzerverwaltungBean.users}" id="benutzerHalle">
+			<p:column headerText="Id">
+				<h:outputText value="#{user.id}" />
+			</p:column>
+			<p:column headerText="Benutzername">
+				<h:outputText value="#{user.username}" />
+			</p:column>
+			<p:column headerText="Passwort">
+				<h:outputText value="#{user.passwort}" />
+			</p:column>
+			<p:column headerText="">
+				<p:commandButton update=":form:benutzerDeleteDetail"
+						oncomplete="PF('benutzerDeleteDialog').show()" title="Löschen"
+						styleClass="halleBtn" icon="ui-icon-closethick" value="Löschen">
+						<f:setPropertyActionListener value="#{user}"
+							target="#{benutzerverwaltungBean.selectedUser}" />
+					</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	<p:dialog header="Benutzer hinzufügen..." widgetVar="userAddDialog"
+			modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="userAddDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="text-align:left;">
+					<h:outputLabel for="benutzername" value="Benutzername" />
+					<h:inputText id="benutzername" />
+
+					<h:outputLabel for="passwort1" value="Passwort" />
+					<h:inputSecret id="passwort1" />
+
+					<h:outputLabel for="passwort2" value="Passwort wiederholen" />
+					<h:inputSecret id="passwort2" />
+				</p:panelGrid>
+				<p:commandButton class="halleBtn" title="Speichern"
+					style="float:left;font-size:12px;margin:10px;" icon="ui-icon-disk"
+					value="Speichern" action="#{benutzerverwaltungBean.addUser}"
+					oncomplete="PF('userAddDialog').hide()">
+				</p:commandButton>
+				<p:commandButton class="halleBtn" title="Abbrechen"
+					style="float:left;font-size:12px;margin:10px;"
+					icon="ui-icon-cancel" value="Abbrechen"
+					oncomplete="PF('userAddDialog').hide()">
+				</p:commandButton>
+			</p:outputPanel>
+		</p:dialog>
+		<p:dialog header="Benutzer löschen..." widgetVar="benutzerDeleteDialog"
+			modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="benutzerDeleteDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="text-align:left;">
+					<h:outputLabel for="bezeichnung" escape="true"
+						value="Wollen Sie den Benutzer  &lt;&lt;#{benutzerverwaltungBean.selectedUser.username}&gt;&gt; wirklich löschen?" />
+
+				</p:panelGrid>
+				<p:commandButton class="halleBtn" title="Ja" icon="ui-icon-check"
+					value="Ja" action="#{benutzerverwaltungBean.deleteUser}"
+					oncomplete="PF('benutzerDeleteDialog').hide()"
+					update="form:benutzerHalle">
+				</p:commandButton>
+				<p:commandButton class="halleBtn" title="Nein"
+					icon="ui-icon-cancel" value="Nein"
+					oncomplete="PF('benutzerDeleteDialog').hide()"
+					update="form:benutzerHalle">
+				</p:commandButton>
+			</p:outputPanel>
+		</p:dialog>
 	</h:form>
 </ui:composition>

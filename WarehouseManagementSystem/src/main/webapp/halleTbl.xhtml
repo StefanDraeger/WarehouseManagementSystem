@@ -4,27 +4,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<h:form id="form" rendered="#{loginBean.loginSuccessfull}">
-		<p:toolbar id="toolbar" rendered="#{loginBean.loginSuccessfull}">
-			<f:facet name="left">
-				<p:commandButton update=":form:halleTable" styleClass="halleBtn"
-					action="#{firmaBean.updateHalleTable}" title="Aktualisieren"
-					icon="ui-icon-refresh" value="Aktualisieren">
-				</p:commandButton>
-				<p:commandButton update=":form:halleAddDetail" styleClass="halleBtn"
-					oncomplete="PF('halleAddDialog').show()"
-					title="Halle hinzufügen..." icon="ui-icon-plus"
-					value="Halle hinzufügen...">
-					<f:setPropertyActionListener value="#{halle}"
-						target="#{firmaBean.selectedHalle}" />
-				</p:commandButton>
-				<p:commandButton styleClass="halleBtn" title="Benutzerverwaltung"
-					icon="ui-icon-person" value="Benutzerverwaltung" action="#{firmaBean.loadBenutzer}">
-					<f:setPropertyActionListener value="logout"
-						target="#{firmaBean.contentPage}" />
-				</p:commandButton>
-			</f:facet>
-		</p:toolbar>
-
 		<p:dataGrid columns="3" value="#{firmaBean.hallen}" var="halle"
 			resizableColumns="true" id="halleTable" style="text-align:left;">
 			<f:facet name="header">
@@ -122,32 +101,6 @@
 					icon="ui-icon-cancel" value="Nein"
 					oncomplete="PF('halleDeleteDialog').hide()"
 					update="form:halleTable">
-				</p:commandButton>
-			</p:outputPanel>
-		</p:dialog>
-		<p:dialog header="Benutzer hinzufügen..." widgetVar="userAddDialog"
-			modal="false" showEffect="fade" hideEffect="fade" resizable="false">
-			<p:outputPanel id="userAddDetail" style="text-align:center;">
-				<p:panelGrid columns="2" columnClasses="label,value"
-					style="text-align:left;">
-					<h:outputLabel for="benutzername" value="Benutzername" />
-					<h:inputText id="benutzername" />
-
-					<h:outputLabel for="passwort1" value="Passwort" />
-					<h:inputSecret id="passwort1" />
-
-					<h:outputLabel for="passwort2" value="Passwort wiederholen" />
-					<h:inputSecret id="passwort2" />
-				</p:panelGrid>
-				<p:commandButton class="halleBtn" title="Speichern"
-					style="float:left;font-size:12px;margin:10px;" icon="ui-icon-disk"
-					value="Speichern" action="#{firmaBean.addUser}"
-					oncomplete="PF('userAddDialog').hide()">
-				</p:commandButton>
-				<p:commandButton class="halleBtn" title="Abbrechen"
-					style="float:left;font-size:12px;margin:10px;"
-					icon="ui-icon-cancel" value="Abbrechen"
-					oncomplete="PF('userAddDialog').hide()">
 				</p:commandButton>
 			</p:outputPanel>
 		</p:dialog>
