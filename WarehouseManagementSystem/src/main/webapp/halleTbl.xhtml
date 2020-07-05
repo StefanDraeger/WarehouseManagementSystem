@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="form" rendered="#{loginBean.loginSuccessfull}">
+		<p:dataGrid columns="3" value="#{firmaBean.hallen}" var="halle"
+			resizableColumns="true" id="halleTable" style="text-align:left;">
+			<f:facet name="header">
+				<h:outputText value="Hallen" />
+			</f:facet>
+			<p:panel>
+				<center>
+					<h:graphicImage value="resources/images/halle1.jpg"
+						style="text-align:center;"></h:graphicImage>
+					<h:outputText value="#{halle.bezeichnung}"
+						style="text-align:center;display:inline-block;width:100%;" />
+					<p:commandButton update=":form:halleDetail" styleClass="halleBtn"
+						oncomplete="PF('halleDialog').show()" title="öffnen"
+						icon="ui-icon-folder-open" value="öffnen">
+						<f:setPropertyActionListener value="#{halle}"
+							target="#{firmaBean.selectedHalle}" />
+					</p:commandButton>
+					<p:commandButton update=":form:halleDetail" styleClass="halleBtn"
+						oncomplete="PF('halleDialog').show()" title="Info"
+						icon="ui-icon-info" value="Info">
+						<f:setPropertyActionListener value="#{halle}"
+							target="#{firmaBean.selectedHalle}" />
+					</p:commandButton>
+					<p:commandButton update=":form:halleDeleteDetail"
+						oncomplete="PF('halleDeleteDialog').show()" title="Löschen"
+						styleClass="halleBtn" icon="ui-icon-closethick" value="Löschen">
+						<f:setPropertyActionListener value="#{halle}"
+							target="#{firmaBean.selectedHalle}" />
+					</p:commandButton>
+					<div style="clear: both" />
+				</center>
+			</p:panel>
+		</p:dataGrid>
+		<p:dialog header="Info..." widgetVar="halleDialog" modal="false"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="halleDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty firmaBean.selectedHalle}"
+					columnClasses="label,value" style="text-align:left;">
+					<f:facet name="header">
+						<h:graphicImage value="resources/images/halle1.jpg"></h:graphicImage>
+					</f:facet>
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{firmaBean.selectedHalle.id}" />
+
+					<h:outputText value="Bezeichnung" />
+					<h:outputText value="#{firmaBean.selectedHalle.bezeichnung}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+		<p:dialog header="Halle hinzufügen..." widgetVar="halleAddDialog"
+			modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="halleAddDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="text-align:left;">
+					<f:facet name="header">
+						<h:graphicImage value="resources/images/halle1.jpg" />
+					</f:facet>
+
+					<h:outputLabel for="bezeichnung" value="Bezeichnung" />
+					<h:inputText id="bezeichnung" />
+
+					<h:outputLabel for="hasStellplatz" value="hat Stellplätze" />
+					<h:selectBooleanCheckbox id="hasStellplatz" />
+
+					<h:outputLabel for="hasRegal" value="hat Regale" />
+					<h:selectBooleanCheckbox id="hasRegal" />
+
+				</p:panelGrid>
+				<p:commandButton class="halleBtn" title="Speichern"
+					style="float:left;font-size:12px;margin:10px;" icon="ui-icon-disk"
+					value="Speichern" action="#{firmaBean.addHalle}"
+					oncomplete="PF('halleAddDialog').hide()" update="form:halleTable">
+				</p:commandButton>
+			</p:outputPanel>
+		</p:dialog>
+		<p:dialog header="Halle löschen..." widgetVar="halleDeleteDialog"
+			modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="halleDeleteDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="text-align:left;">
+					<h:outputLabel for="bezeichnung" escape="true"
+						value="Wollen Sie die Halle  &lt;&lt;#{firmaBean.selectedHalle.bezeichnung}&gt;&gt; wirklich löschen?" />
+
+				</p:panelGrid>
+				<p:commandButton class="halleBtn" title="Ja"
+					style="float:left;font-size:12px;margin:10px;" icon="ui-icon-check"
+					value="Ja" action="#{firmaBean.deleteHalle}"
+					oncomplete="PF('halleDeleteDialog').hide()"
+					update="form:halleTable">
+				</p:commandButton>
+				<p:commandButton class="halleBtn" title="Nein"
+					style="float:left;font-size:12px;margin:10px;"
+					icon="ui-icon-cancel" value="Nein"
+					oncomplete="PF('halleDeleteDialog').hide()"
+					update="form:halleTable">
+				</p:commandButton>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+</ui:composition>

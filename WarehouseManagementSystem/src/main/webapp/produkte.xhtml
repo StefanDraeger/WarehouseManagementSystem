@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="form">
+		<p:toolbar id="toolbar" rendered="#{loginBean.loginSuccessfull}">
+			<f:facet name="left">
+				<p:commandButton update=":form:produkteTable" styleClass="halleBtn"
+					oncomplete="PF('addProduktDialog').show()"
+					title="Produkt hinzufügen..." icon="ui-icon-plus"
+					value="Produkt hinzufügen...">
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<p:dataTable id="produkteTable" value="#{produkteBean.produkte}"
+			var="produkt" reflow="true" rows="5" paginator="true">
+
+			<p:column headerText="" width="75">
+				<h:graphicImage rendered="#{produkt.gesperrt}" width="20" style="margin:5px;"
+					value="resources/images/gesperrt.png" title="Produkt ist gesperrt!"></h:graphicImage>
+
+				<h:graphicImage rendered="#{produkt.anzahl lt produkt.warnAnzahl}" width="20"
+					value="resources/images/warning.png" style="margin:5px;"
+					title="Warnung bei Anzahl des Produktes!"></h:graphicImage>
+			</p:column>
+
+			<p:column headerText="Name">
+				<h:outputText value="#{produkt.name}" style="vertical-align:middle;" />
+			</p:column>
+
+			<p:column headerText="Anzahl" width="75">
+				<h:outputText value="#{produkt.anzahl}" />
+			</p:column>
+
+			<p:column headerText="Menge" width="75">
+				<h:outputText value="#{produkt.menge} #{produkt.mengeneinheit}" />
+			</p:column>
+
+			<p:column headerText="Abmaße" width="200">
+				<h:outputText
+					value="#{produkt.laenge} x #{produkt.breite} (#{produkt.laenge * produkt.breite}m&#xB2;)" />
+			</p:column>
+
+			<p:column headerText="Packmaterial">
+				<h:outputText value="#{produkt.packmaterial}" />
+			</p:column>
+
+			<p:column headerText="">
+				<p:commandButton class="halleBtn" icon="ui-icon-disk"
+					action="#{produkteBean.addProdukt}" update="form:produkteTable">
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+		<p:dialog header="Produkt hinzufügen..." widgetVar="addProduktDialog"
+			modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="produktDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="text-align:left;">
+
+					<h:outputText value="Name" />
+					<h:inputText value="#{produkteBean.createProdukt.name}" />
+
+					<h:outputText value="Menge" />
+					<h:inputText value="#{produkteBean.createProdukt.menge}" />
+
+					<h:outputText value="Mengeneinheit" />
+					<h:inputText value="#{produkteBean.createProdukt.mengeneinheit}" />
+
+					<h:outputText value="Länge" />
+					<h:inputText value="#{produkteBean.createProdukt.laenge}" />
+
+					<h:outputText value="Breite" />
+					<h:inputText value="#{produkteBean.createProdukt.breite}" />
+
+					<h:outputText value="Anzahl" />
+					<h:inputText value="#{produkteBean.createProdukt.anzahl}" />
+
+					<h:outputText value="Warnung bei Anzahl" />
+					<h:inputText value="#{produkteBean.createProdukt.warnAnzahl}" />
+
+					<h:outputText value="Packmaterial" />
+					<h:inputText value="#{produkteBean.createProdukt.packmaterial}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+			<p:commandButton class="halleBtn" title="Speichern"
+				style="float:left;font-size:12px;margin:10px;" icon="ui-icon-disk"
+				value="Speichern" action="#{produkteBean.addProdukt}"
+				oncomplete="PF('addProduktDialog').hide()"
+				update="form:produkteTable">
+			</p:commandButton>
+		</p:dialog>
+	</h:form>
+</ui:composition>
