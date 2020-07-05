@@ -1,2 +1,0 @@
-WarehouseManagementSystem
-C:\Users\Stefan Draeger\wks_swingtest\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
