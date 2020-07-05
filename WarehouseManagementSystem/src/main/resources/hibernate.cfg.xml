@@ -17,10 +17,14 @@
 
 		<!-- Specifying Session Context -->
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- property name="hibernate.hbm2ddl.auto">create-drop</property -->
 
 		<!-- Mapping With Model Class Containing Annotations -->
 		<mapping class="de.draegerit.wms.db.User" />
 		<mapping class="de.draegerit.wms.db.Halle" />
 		<mapping class="de.draegerit.wms.db.Produkt" />
+		<mapping class="de.draegerit.wms.db.Lieferant" />
 	</session-factory>
 </hibernate-configuration>

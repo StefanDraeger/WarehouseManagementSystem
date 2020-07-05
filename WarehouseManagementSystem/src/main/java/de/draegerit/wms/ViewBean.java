@@ -43,7 +43,12 @@ public class ViewBean {
 		setContentPage("produkte");
 		return "success";
 	}
-
+	
+	public String loadLieferanten() {
+		setContentPage("lieferanten");
+		return "success";
+	}
+	
 	public String getContentPage() {
 		return contentPage;
 	}

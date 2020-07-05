@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form id="form">
+		<p:toolbar id="toolbar" rendered="#{loginBean.loginSuccessfull}">
+			<f:facet name="left">
+				<p:commandButton update=":form:lieferantenTable"
+					styleClass="halleBtn" oncomplete="PF('addLieferantDialog').show()"
+					title="Lieferant hinzufügen..." icon="ui-icon-plus"
+					value="Lieferant hinzufügen...">
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<p:dataTable id="lieferantenTable"
+			value="#{lieferantenBean.lieferanten}" var="lieferant" reflow="true"
+			rows="5" paginator="true">
+
+			<p:column headerText="Name">
+				<h:outputText value="#{lieferant.name}"
+					style="vertical-align:middle;" />
+			</p:column>
+
+			<p:column headerText="Anschrift">
+				<h:outputText value="#{lieferant.anschrift}" />
+			</p:column>
+
+			<p:column headerText="Telefonnummer">
+				<h:outputText value="#{lieferant.telefonnummer}" />
+			</p:column>
+
+		</p:dataTable>
+		<p:dialog header="Lieferant hinzufügen..."
+			widgetVar="addLieferantDialog" modal="false" showEffect="fade"
+			hideEffect="fade" resizable="false">
+			<p:outputPanel id="lieferantDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="text-align:left;">
+
+					<h:outputText value="Name" />
+					<h:inputText value="#{lieferantenBean.createLieferant.name}" />
+
+					<h:outputText value="Anschrift" />
+					<h:inputText value="#{lieferantenBean.createLieferant.anschrift}" />
+
+					<h:outputText value="Telefonnummer" />
+					<h:inputText
+						value="#{lieferantenBean.createLieferant.telefonnummer}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+			<p:commandButton class="halleBtn" title="Speichern"
+				style="float:left;font-size:12px;margin:10px;" icon="ui-icon-disk"
+				value="Speichern" action="#{lieferantenBean.addLieferant}"
+				oncomplete="PF('addLieferantDialog').hide()"
+				update="form:lieferantenTable">
+			</p:commandButton>
+		</p:dialog>
+	</h:form>
+</ui:composition>

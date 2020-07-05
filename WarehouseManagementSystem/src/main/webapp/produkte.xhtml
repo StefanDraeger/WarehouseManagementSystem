@@ -81,7 +81,10 @@
 					<h:inputText value="#{produkteBean.createProdukt.warnAnzahl}" />
 
 					<h:outputText value="Packmaterial" />
-					<h:inputText value="#{produkteBean.createProdukt.packmaterial}" />
+					<h:selectOneMenu value="#{produkteBean.createProdukt.packmaterial}" >
+    					<f:selectItems value="#{dataBean.packmaterialien}" />
+					</h:selectOneMenu>			
+					
 
 				</p:panelGrid>
 			</p:outputPanel>

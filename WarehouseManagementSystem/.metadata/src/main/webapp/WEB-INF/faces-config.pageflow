@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15939578712510" configfile="/WarehouseManagementSystem/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="178" id="pf15939578974771" referenceLink="//@navigationRule.0/@navigationCase.7/@toViewId|" outlinks="pf15939578974772 pf15939578974773 pf15939578974774 pf15939578974775 pf15939578974776 pf15939578974777 pf15939578974778 pf15939578974779 pf159395789747710 pf159395836532812" inlinks="pf15939578974772 pf15939578974773 pf15939578974774 pf15939578974776 pf15939578974777 pf15939578974778 pf15939578974779 pf159395789747710 pf159395836532812" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="addHalle.xhtml" x="338" y="178" id="pf159395789747711" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf15939578974775" path="/addHalle.xhtml"/>
+  <links id="pf15939578974775" target="pf159395789747711" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{firmaBean.addHalle}"/>
+  <links id="pf15939578974772" target="pf15939578974771" source="pf15939578974771" outcome="fail" redirect="true" fromaction="#{loginBean.doLogin}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf15939578974773" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{loginBean.doLogin}">
+    <bendPoints d1Height="-66" d2Height="-66"/>
+    <bendPoints d1Width="-94" d1Height="-66" d2Width="-94" d2Height="-66"/>
+    <bendPoints d1Width="-94" d2Width="-94"/>
+  </links>
+  <links id="pf15939578974774" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{loginBean.doLogout}">
+    <bendPoints d1Height="-96" d2Height="-96"/>
+    <bendPoints d1Width="-124" d1Height="-96" d2Width="-124" d2Height="-96"/>
+    <bendPoints d1Width="-124" d2Width="-124"/>
+  </links>
+  <links id="pf15939578974776" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{viewBean.benutzerverwaltung}">
+    <bendPoints d1Height="-126" d2Height="-126"/>
+    <bendPoints d1Width="-154" d1Height="-126" d2Width="-154" d2Height="-126"/>
+    <bendPoints d1Width="-154" d2Width="-154"/>
+  </links>
+  <links id="pf15939578974777" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{benutzerverwaltungBean.aktualisieren}">
+    <bendPoints d1Height="-216" d2Height="-216"/>
+    <bendPoints d1Width="-244" d1Height="-216" d2Width="-244" d2Height="-216"/>
+    <bendPoints d1Width="-244" d2Width="-244"/>
+  </links>
+  <links id="pf15939578974778" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{viewBean.loadProdukte}"/>
+  <links id="pf15939578974779" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{viewBean.halleverwaltung}"/>
+  <links id="pf159395789747710" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{viewBean.loadLieferanten}"/>
+  <links id="pf159395836532812" target="pf15939578974771" source="pf15939578974771" outcome="success" redirect="true" fromaction="#{viewBean.addLieferant}"/>
+</pageflow:Pageflow>

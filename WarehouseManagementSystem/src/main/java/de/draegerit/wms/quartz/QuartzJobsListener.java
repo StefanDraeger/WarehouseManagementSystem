@@ -25,14 +25,13 @@ public class QuartzJobsListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent ctx) {
 		JobDetail job = JobBuilder.newJob(WarningProduktQuartzJob.class).withIdentity("myJob", "group1").build();
-		/**
-		 * Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger",
-		 * "group1").startNow()
-		 * .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(10).repeatForever()).build();
-		 **/
 
-		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger3", "group1")
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 6 * * *")).forJob("myJob").build();
+		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger", "group1").startNow()
+				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(100).repeatForever()).build();
+
+//
+//		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger3", "group1")
+//				.withSchedule(CronScheduleBuilder.cronSchedule("0 6 * * *")).forJob("myJob").build();
 
 		try {
 			scheduler = ((StdSchedulerFactory) ctx.getServletContext()

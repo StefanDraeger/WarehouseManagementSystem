@@ -9,7 +9,7 @@
 			<var>labels</var>
 		</resource-bundle>
 	</application>
-	
+
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
@@ -48,7 +48,18 @@
 			<to-view-id>/index.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-		
+		<navigation-case>
+			<from-action>#{viewBean.loadLieferanten}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{viewBean.addLieferant}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 		<navigation-case>
 			<from-action>#{viewBean.halleverwaltung}</from-action>
 			<from-outcome>success</from-outcome>

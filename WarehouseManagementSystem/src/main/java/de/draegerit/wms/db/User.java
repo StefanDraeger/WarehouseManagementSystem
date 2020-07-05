@@ -2,20 +2,24 @@ package de.draegerit.wms.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
 public class User {
+	
 	@Id
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private long id;
-	
-	@Column(name="username")
+
+	@Column(name = "username")
 	private String username;
-	
-	@Column(name="passwort")
+
+	@Column(name = "passwort")
 	private String passwort;
 
 	public long getId() {
@@ -41,5 +45,5 @@ public class User {
 	public void setPasswort(String passwort) {
 		this.passwort = passwort;
 	}
-	
+
 }

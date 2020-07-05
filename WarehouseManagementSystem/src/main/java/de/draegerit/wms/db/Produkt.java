@@ -1,8 +1,14 @@
 package de.draegerit.wms.db;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import de.draegerit.wms.db.util.EPackmaterial;
@@ -12,6 +18,7 @@ import de.draegerit.wms.db.util.EPackmaterial;
 public class Produkt {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private long id;
 	
@@ -35,15 +42,17 @@ public class Produkt {
 	
 	@Column(name="warn_anzahl")
 	private int warnAnzahl;
-	
-	
+		
 	@Column(name="packmaterial")
 	private EPackmaterial packmaterial;
 	
 	@Column(name="gesperrt")
 	private boolean gesperrt;
+	
+	@Column(name="lieferanten")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "name")
+	private List<Lieferant> lieferanten;
 		
-
 	public boolean isGesperrt() {
 		return gesperrt;
 	}
@@ -123,6 +132,14 @@ public class Produkt {
 
 	public void setWarnAnzahl(int warnAnzahl) {
 		this.warnAnzahl = warnAnzahl;
+	}
+
+	public List<Lieferant> getLieferanten() {
+		return lieferanten;
+	}
+
+	public void setLieferanten(List<Lieferant> lieferanten) {
+		this.lieferanten = lieferanten;
 	}
 
 }

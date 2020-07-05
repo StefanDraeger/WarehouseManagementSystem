@@ -1,27 +1,37 @@
 package de.draegerit.wms.db;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "lieferant")
 public class Lieferant {
-	
+
 	@Id
-	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
 	private long id;
 
-	@Column(name="name")
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="anschrift")
+
+	@Column(name = "anschrift")
 	private String anschrift;
-	
-	@Column(name="telefonnummer")
+
+	@Column(name = "telefonnummer")
 	private String telefonnummer;
-	
+
+	@ElementCollection
+	private List<Produkt> produkte;
 
 	public long getId() {
 		return id;
@@ -54,5 +64,13 @@ public class Lieferant {
 	public void setTelefonnummer(String telefonnummer) {
 		this.telefonnummer = telefonnummer;
 	}
-	
+
+	public List<Produkt> getProdukte() {
+		return produkte;
+	}
+
+	public void setProdukte(List<Produkt> produkte) {
+		this.produkte = produkte;
+	}
+
 }

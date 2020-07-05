@@ -43,7 +43,13 @@
 					icon="ui-icon-cart" value="Produkte" action="#{viewBean.loadProdukte}">
 					<f:setPropertyActionListener value="produkte"
 						target="#{viewBean.contentPage}" />
-				</p:commandButton>	
+				</p:commandButton>
+				
+					<p:commandButton styleClass="halleBtn" title="Lieferanten"
+					icon="ui-icon-cart" value="Lieferanten" action="#{viewBean.loadLieferanten}">
+					<f:setPropertyActionListener value="lieferanten"
+						target="#{viewBean.contentPage}" />
+				</p:commandButton>		
 				
 			</f:facet>
 		</p:toolbar>
